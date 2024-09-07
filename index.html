@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warcraft Chronicles DaVinci DataBoost</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --background-color: #000000;
+            --card-background: #1E2329;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --accent-color: #00F2FE;
+            --success-color: #01D9AD;
+            --error-color: #FF4757;
+            --highlight-color: #00F2FE;
+        }
+        body {
+            display: flex;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            background-image: url('https://drive.google.com/uc?export=view&id=1564SFs18CmTKKOYIrqqLno8RQIXgoWgt');
+            background-repeat: repeat;
+            background-size: 300px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 200px;
+            background-color: var(--card-background);
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+            color: var(--text-primary);
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            width: 100%;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--highlight-color);
+            color: var(--background-color);
+        }
+        .main-content {
+            margin-left: 220px;
+            flex: 1;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--background-color);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #FFD700, #FF6B6B, #4158D0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: titleAnimation 5s ease infinite;
+        }
+        @keyframes titleAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: var(--card-background);
+            color: var(--text-primary);
+            border: 1px solid var(--text-secondary);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .clip-container {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .clip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .clip-number {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .clip-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .clip-link a:hover {
+            text-decoration: underline;
+        }
+        .clip-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .clip-detail {
+            background-color: black;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .clip-detail strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .clipboard-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-color);
+            border: none;
+            color: var(--background-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .clipboard-button:hover {
+            background-color: #4158D0;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-container label {
+            margin-right: 10px;
+            color: var(--text-secondary);
+        }
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            appearance: none;
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 2px solid var(--accent-color);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+        .checkbox:checked {
+            background-color: var(--accent-color);
+        }
+        .checkbox:checked::after {
+            content: '✓';
+            font-size: 14px;
+            color: var(--background-color);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            background-color: var(--accent-color);
+            border: none;
+            color: var(--background-color);
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .pagination button:hover {
+            background-color: #4158D0;
+        }
+        .pagination button:disabled {
+            background-color: var(--text-secondary);
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" id="link-ENCOURS" onclick="loadData('EN COURS')">EN COURS</a>
+        <a href="#" id="link-AFAIRE1" onclick="loadData('A FAIRE 1')">A FAIRE 1</a>
+        <a href="#" id="link-AFAIRE2" onclick="loadData('A FAIRE 2')">A FAIRE 2</a>
+        <a href="#" id="link-RESERVE" onclick="loadData('RESERVE')">RESERVE</a>
+        <a href="#" id="link-MASTER" onclick="loadData('MASTER')">MASTER</a>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <h1>Warcraft Chronicles DaVinci DataBoost</h1>
+            <div class="search-bar-container">
+                <input type="text" id="searchBar" class="search-bar" onkeyup="filterItems()" placeholder="Search for clips..">
+            </div>
+            <div id="clips-container"></div>
+            <div class="pagination">
+                <button id="prevPage" onclick="changePage(-1)">Previous</button>
+                <button id="nextPage" onclick="changePage(1)">Next</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentPage = 0;
+        const clipsPerPage = 5;
+        let allClips = [];
+        let currentSheet = 'EN COURS';
+
+        function loadData(sheetName) {
+            currentSheet = sheetName;
+            updateActiveLink(sheetName);
+            google.script.run.withSuccessHandler(function(data) {
+                allClips = data;
+                currentPage = 0;
+                renderClips();
+            }).getData(sheetName);
+        }
+
+        function updateActiveLink(sheetName) {
+            const links = document.querySelectorAll('.sidebar a');
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
+            const linkId = `link-${sheetName.replace(/\s/g, '').toUpperCase()}`;
+            const activeLink = document.getElementById(linkId);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+        
+        function renderClips() {
+            const container = document.getElementById('clips-container');
+            container.innerHTML = '';
+            const startIndex = currentPage * clipsPerPage;
+            const endIndex = startIndex + clipsPerPage;
+            const clipsToRender = allClips.slice(startIndex, endIndex);
+            
+            clipsToRender.forEach((clip, index) => {
+                const clipElement = document.createElement('div');
+                clipElement.className = 'clip-container';
+                clipElement.innerHTML = `
+                    <div class="clip-header">
+                        <div class="clip-number">Clip #${clip.number}</div>
+                        <div class="clip-link">
+                            <a href="${clip.link}" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> View Clip
+                            </a>
+                        </div>
+                        <div class="checkbox-container">
+                            <label for="checkbox-${startIndex + index}">Downloaded?</label>
+                            <input type="checkbox" id="checkbox-${startIndex + index}" class="checkbox" 
+                                   ${clip.checkbox ? 'checked' : ''} 
+                                   onchange="updateCheckboxAllSheets(${startIndex + index}, this.checked)">
+                        </div>
+                    </div>
+                    <div class="clip-details">
+                        <div class="clip-detail">
+                            <strong>Emotion Streamer</strong>
+                            <span id="emotion-${startIndex + index}">${clip.emotionStreamer}</span>
+                            <button class="clipboard-button" onclick="copyToClipboard('emotion-${startIndex + index}', this)">Copy</button>
+                        </div>
+                        <div class="clip-detail">
+                            <strong>New Clip Title @Streamer</strong>
+                            <span id="title-${startIndex + index}">${clip.clipTitle}</span>
+                            <button class="clipboard-button" onclick="copyToClipboard('title-${startIndex + index}', this)">Copy</button>
+                        </div>
+                        <div class="clip-detail">
+                            <strong>Time</strong>
+                            ${clip.time}
+                        </div>
+                        <div class="clip-detail">
+                            <strong>Meme & FX</strong>
+                            ${clip.memeFx}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(clipElement);
+            });
+            
+            updatePaginationButtons();
+        }
+        
+        function changePage(delta) {
+            currentPage += delta;
+            renderClips();
+        }
+        
+        function updatePaginationButtons() {
+            const prevButton = document.getElementById('prevPage');
+            const nextButton = document.getElementById('nextPage');
+            prevButton.disabled = currentPage === 0;
+            nextButton.disabled = (currentPage + 1) * clipsPerPage >= allClips.length;
+        }
+        
+        function copyToClipboard(elementId, button) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                button.textContent = 'GG';
+                button.style.backgroundColor = 'var(--success-color)';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.style.backgroundColor = 'var(--accent-color)';
+                }, 2000);
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+                button.textContent = 'Error';
+                button.style.backgroundColor = 'var(--error-color)';
+            });
+        }
+
+        function updateCheckboxAllSheets(index, isChecked) {
+            google.script.run.withSuccessHandler(function(result) {
+                if (result) {
+                    console.log('Checkbox updated successfully across all sheets');
+                }
+            }).updateCheckboxAllSheets(index, isChecked);
+        }
+
+        function filterItems() {
+            const input = document.getElementById('searchBar');
+            const filter = input.value.toUpperCase();
+            const clips = document.querySelectorAll('.clip-container');
+            clips.forEach(clip => {
+                const text = clip.innerText || clip.textContent;
+                clip.style.display = text.toUpperCase().indexOf(filter) > -1 ? '' : 'none';
+            });
+        }
+        
+        // Initial load for 'EN COURS'
+        loadData('EN COURS');
+    </script>
+</body>
+</html>
